@@ -95,7 +95,7 @@ const renderDocOfItem = (item, id) => {
     requestHeader = renderRequestHeader(item.request.header);
     requestBody = renderRequestBody(item.request.body);
 
-    requestDescription = '||Описание||' + item.request.description;
+    requestDescription = '||Описание||{code}' + item.request.description + '{code}|';
 
     if (item.request.url !== undefined && item.request.url.raw !== undefined) {
        requestUrl = '||Ресурс||{code}' + item.request.url.raw + '{code}|';
@@ -122,7 +122,7 @@ const renderDoc = (apidoc) => {
         item: items,
     } = apidoc;
     
-    let docDOM = `# ${info.name}` + eol +
+    let docDOM = `h1. ${info.name}` + eol +
                  renderMenu(items) + eol;
 
     items.forEach((item, index) => {
@@ -149,10 +149,10 @@ const renderDoc = (apidoc) => {
                      }).join('');
 
             docDOM = docDOM + eol + "----" + eol;
-            docDOM = docDOM + "Сгенерировано из postmnan с помощью postman2cowiki" + eol;
         }
     });
 
+    docDOM = docDOM + eol + eol + eol + "Сгенерировано из postman с помощью postman2cowiki" + eol;
     return docDOM; 
 };
 
